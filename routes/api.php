@@ -40,6 +40,7 @@ Route::post('/user', function (Request $request) {
         'openId' => 'required|between:28,28',
         'unionId' => 'nullable|between:29,29',
         'avatarUrl' => 'nullable|url',
+        'gender'=>'nullable|in:0,1,2',
     ], [
 //        'user_openid.required' => 'openid必须提供',
 //        'user_openid.between' => 'openid长度28位',
@@ -60,6 +61,10 @@ Route::post('/user', function (Request $request) {
             'user_unionid'=>isset($data1['unionId'])?$data1['unionId']:'',
             'user_nickname'=>isset($data1['nickname'])?$data1['nickname']:'',
             'user_avatar_url'=>isset($data1['avatarUrl'])?$data1['avatarUrl']:'',
+            'user_gender'=>isset($data1['gender'])?$data1['gender']:'',
+            'user_city'=>isset($data1['city'])?$data1['city']:'',
+            'user_province'=>isset($data1['province'])?$data1['province']:'',
+            'user_country'=>isset($data1['country'])?$data1['country']:'',
         ];
         //判断数据库中是否有这条记录，有就更新，没有就新增
         $res = DB::table('user')->where('user_openid', $data['user_openid'])->first();
